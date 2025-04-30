@@ -14,8 +14,7 @@ typedef OnSubmittedCallback = void Function(String string);
 class SuggestionsTextField extends StatefulWidget {
   SuggestionsTextField(
       {required this.tagsTextField, this.onSubmitted, Key? key})
-      : assert(tagsTextField != null),
-        super(key: key);
+      : super(key: key);
 
   final TagsTextField tagsTextField;
   final OnSubmittedCallback? onSubmitted;
@@ -99,6 +98,7 @@ class _SuggestionsTextFieldState extends State<SuggestionsTextField> {
   InputDecoration get _initialInputDecoration {
     var input = _inputDecoration ??
         InputDecoration(
+            suffix: widget.tagsTextField.suffixIcon,
             disabledBorder: InputBorder.none,
             errorBorder: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(
@@ -197,7 +197,9 @@ class TagsTextField {
       this.inputDecoration,
       this.onSubmitted,
       this.onChanged,
-      this.focusNode});
+      this.focusNode,
+      this.suffixIcon,
+    });
   final FocusNode? focusNode;
 
   final double width;
@@ -223,4 +225,5 @@ class TagsTextField {
   final int? maxLength;
   final OnSubmittedCallback? onSubmitted;
   final OnChangedCallback? onChanged;
+  final Widget? suffixIcon;
 }
