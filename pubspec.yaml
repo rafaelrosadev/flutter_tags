@@ -5,7 +5,7 @@ homepage: https://github.com/avdosev/flutter_tags/
 repository: https://github.com/avdosev/flutter_tags/
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=3.2.3 <4.0.0'
 
 dependencies:
   flutter:
