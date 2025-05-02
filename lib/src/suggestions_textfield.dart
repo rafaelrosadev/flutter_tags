@@ -24,8 +24,6 @@ class SuggestionsTextField extends StatefulWidget {
 }
 
 class _SuggestionsTextFieldState extends State<SuggestionsTextField> {
-  final _controller = TextEditingController();
-
   List<String> _matches = [];
   String? _helperText;
   bool _helperCheck = true;
@@ -75,7 +73,7 @@ class _SuggestionsTextFieldState extends State<SuggestionsTextField> {
           ),
         ),
         TextField(
-          controller: _controller,
+          controller: widget.tagsTextField.controller,
           focusNode: widget.tagsTextField.focusNode,
           enabled: widget.tagsTextField.enabled,
           autofocus: widget.tagsTextField.autofocus ?? true,
@@ -141,11 +139,11 @@ class _SuggestionsTextFieldState extends State<SuggestionsTextField> {
         setState(() {
           _matches = [];
         });
-        _controller.clear();
+        widget.tagsTextField.controller.clear();
       }
     } else if (str.isNotEmpty) {
       if (onSubmitted != null) onSubmitted(str);
-      _controller.clear();
+      widget.tagsTextField.controller.clear();
     }
   }
 
@@ -175,31 +173,33 @@ class _SuggestionsTextFieldState extends State<SuggestionsTextField> {
 
 /// Tags TextField
 class TagsTextField {
-  TagsTextField(
-      {this.lowerCase = false,
-      this.textStyle = const TextStyle(fontSize: 14),
-      this.width = 200,
-      this.padding,
-      this.enabled = true,
-      this.duplicates = false,
-      this.suggestions,
-      this.constraintSuggestion = true,
-      this.autocorrect,
-      this.autofocus,
-      this.hintText,
-      this.hintTextColor,
-      this.suggestionTextColor,
-      this.helperText,
-      this.helperTextStyle,
-      this.keyboardType,
-      this.textCapitalization,
-      this.maxLength,
-      this.inputDecoration,
-      this.onSubmitted,
-      this.onChanged,
-      this.focusNode,
-      this.suffixIcon,
-    });
+  TagsTextField({
+    this.lowerCase = false,
+    this.textStyle = const TextStyle(fontSize: 14),
+    this.width = 200,
+    this.padding,
+    this.enabled = true,
+    this.duplicates = false,
+    this.suggestions,
+    this.constraintSuggestion = true,
+    this.autocorrect,
+    this.autofocus,
+    this.hintText,
+    this.hintTextColor,
+    this.suggestionTextColor,
+    this.helperText,
+    this.helperTextStyle,
+    this.keyboardType,
+    this.textCapitalization,
+    this.maxLength,
+    this.inputDecoration,
+    this.onSubmitted,
+    this.onChanged,
+    this.focusNode,
+    this.suffixIcon,
+    required this.controller,
+  });
+  
   final FocusNode? focusNode;
 
   final double width;
@@ -226,4 +226,5 @@ class TagsTextField {
   final OnSubmittedCallback? onSubmitted;
   final OnChangedCallback? onChanged;
   final Widget? suffixIcon;
+  final TextEditingController controller;
 }
